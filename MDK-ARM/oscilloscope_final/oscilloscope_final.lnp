@@ -1,0 +1,28 @@
+--cpu Cortex-M3
+"oscilloscope_final\startup_stm32f103xb.o"
+"oscilloscope_final\fonts.o"
+"oscilloscope_final\st7735.o"
+"oscilloscope_final\main.o"
+"oscilloscope_final\stm32f1xx_it.o"
+"oscilloscope_final\stm32f1xx_hal_msp.o"
+"oscilloscope_final\stm32f1xx_hal_gpio_ex.o"
+"oscilloscope_final\stm32f1xx_hal_adc.o"
+"oscilloscope_final\stm32f1xx_hal_adc_ex.o"
+"oscilloscope_final\stm32f1xx_hal.o"
+"oscilloscope_final\stm32f1xx_hal_rcc.o"
+"oscilloscope_final\stm32f1xx_hal_rcc_ex.o"
+"oscilloscope_final\stm32f1xx_hal_gpio.o"
+"oscilloscope_final\stm32f1xx_hal_dma.o"
+"oscilloscope_final\stm32f1xx_hal_cortex.o"
+"oscilloscope_final\stm32f1xx_hal_pwr.o"
+"oscilloscope_final\stm32f1xx_hal_flash.o"
+"oscilloscope_final\stm32f1xx_hal_flash_ex.o"
+"oscilloscope_final\stm32f1xx_hal_exti.o"
+"oscilloscope_final\stm32f1xx_hal_spi.o"
+"oscilloscope_final\stm32f1xx_hal_tim.o"
+"oscilloscope_final\stm32f1xx_hal_tim_ex.o"
+"oscilloscope_final\system_stm32f1xx.o"
+--strict --scatter "oscilloscope_final\oscilloscope_final.sct"
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "oscilloscope_final.map" -o oscilloscope_final\oscilloscope_final.axf
