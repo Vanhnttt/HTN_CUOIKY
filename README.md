@@ -1,4 +1,3 @@
-
 /* =========================================================
  * NHIỆM VỤ 1 & 3: TÍNH VMAX, VMIN, VPP VÀ TẦN SỐ
  * ========================================================= */
@@ -58,3 +57,23 @@ static uint16_t find_trigger(void)
     return FFT_N / 2; // Nếu không tìm thấy, trả về điểm giữa (sóng tự do)
 }
 
+  
+2. Giải thích thuật toán chi tiết
+
+1. Khởi tạo và đi tìm Đỉnh (Max) - Đáy (Min) của sóng
+Code quét qua toàn bộ mảng dữ liệu lấy mẫu snap (dài 256 phần tử). Ban đầu gán đáy (adc_mn) bằng số to nhất (4095) và đỉnh (adc_mx) bằng số nhỏ nhất (0). Sau đó dùng vòng lặp for, so sánh từng điểm dữ liệu: cứ thấy thằng nào nhỏ hơn adc_mn thì cập nhật lại đáy, to hơn adc_mx thì cập nhật đỉnh.
+
+2. Dịch các con số máy tính ra số Vôn (Volts) thật
+Mã ADC thu được chỉ là các con số vô nghĩa. Ta dùng hàm adc_to_v() để chuyển đổi nó thành số Volt thực tế. Nếu điện áp Đỉnh-Đỉnh (v_pp) quá nhỏ (nhỏ hơn 0.05V), máy sẽ hiểu đó là nhiễu rác (chưa cắm que đo) và bỏ qua không tính toán tần số nữa.
+
+3. Tìm các điểm cắt ngang để tính Tần số (Có Hysteresis chống nhiễu)
+Lấy điểm chính giữa của sóng làm ranh giới (mid). Code đặt ra một vùng cách ly (hyst) bằng 1/10 biên độ sóng.
+Quét từ đầu đến cuối mảng:  
+Khi sóng vọt LÊN qua ngưỡng trên (mid + hyst), code tính là bắt được một cạnh lên (edges++). Nó ghi nhớ vị trí đầu tiên cắt ngưỡng (first) và vị trí cuối cùng cắt ngưỡng (last).
+Tín hiệu bắt buộc phải tụt XUỐNG DƯỚI ngưỡng dưới (mid - hyst) thì mới được tính là chuẩn bị cho chu kỳ tiếp theo (biến state về 0). Điều này gọi là Thuật toán Schmitt Trigger, giúp loại bỏ hoàn toàn việc đếm nhầm tần số khi tín hiệu bị rung/nhiễu.
+
+4. Tính ra Tần số cuối cùng (Hz)
+Sau khi tìm được các điểm cắt, code tính tần số bằng công thức: f = Tần số lấy mẫu * (Số lượng chu kỳ / Khoảng cách thời gian). Ở code mới này, để tăng tốc độ xử lý cho chip STM32, toàn bộ công thức được tính bằng Toán học số nguyên (không dùng số thập phân), cộng thêm một lượng den / 2 ở tử số để làm tròn số cực kỳ chính xác.
+
+5. Tìm vị trí Trigger (Điểm mỏ neo để bắt đầu vẽ sóng)
+Nhiệm vụ này được chuyển ra hàm find_trigger(). Khi bắt đầu vẽ lên màn hình, máy hiện sóng không vẽ bừa, mà nó sẽ quét mảng để tìm xem lúc nào tín hiệu đi từ thấp vọt lên cắt ngang cái mốc trig_lvl (được chỉnh bằng nút vặn Encoder). Khi bắt trúng điểm đó, nó sẽ neo sóng lại, giúp sóng đứng im hiển thị rõ ràng trên màn hình chứ không bị chạy trôi tuột đi.
