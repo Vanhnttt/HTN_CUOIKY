@@ -65,10 +65,6 @@ void Error_Handler(void);
 #define DL_RS_GPIO_Port GPIOB
 #define DL_CS_Pin GPIO_PIN_10
 #define DL_CS_GPIO_Port GPIOB
-#define DT_Pin GPIO_PIN_4
-#define DT_GPIO_Port GPIOB
-#define CLK_Pin GPIO_PIN_5
-#define CLK_GPIO_Port GPIOB
 #define SW_Pin GPIO_PIN_8
 #define SW_GPIO_Port GPIOB
 #define BUT_HOLD_RUN_Pin GPIO_PIN_9
