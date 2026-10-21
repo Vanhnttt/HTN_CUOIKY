@@ -1,10 +1,6 @@
 # DỰ ÁN MÁY HIỆN SÓNG MINI (STM32F103C8T6 + TFT ST7735 1.8")
-**Mã đề tài:** V07 (Mức độ: Vừa)
-
 ---
-
 ## 📂 CẤU TRÚC DỰ ÁN ĐÃ TÁCH MODULE HOÀN CHỈNH
-
 ```text
 oscilloscope/
 ├── .vscode/
