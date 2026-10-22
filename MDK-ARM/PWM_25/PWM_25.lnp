@@ -1,0 +1,23 @@
+--cpu Cortex-M3
+"pwm_25\startup_stm32f103xb.o"
+"pwm_25\main.o"
+"pwm_25\stm32f1xx_it.o"
+"pwm_25\stm32f1xx_hal_msp.o"
+"pwm_25\stm32f1xx_hal_gpio_ex.o"
+"pwm_25\stm32f1xx_hal_tim.o"
+"pwm_25\stm32f1xx_hal_tim_ex.o"
+"pwm_25\stm32f1xx_hal.o"
+"pwm_25\stm32f1xx_hal_rcc.o"
+"pwm_25\stm32f1xx_hal_rcc_ex.o"
+"pwm_25\stm32f1xx_hal_gpio.o"
+"pwm_25\stm32f1xx_hal_dma.o"
+"pwm_25\stm32f1xx_hal_cortex.o"
+"pwm_25\stm32f1xx_hal_pwr.o"
+"pwm_25\stm32f1xx_hal_flash.o"
+"pwm_25\stm32f1xx_hal_flash_ex.o"
+"pwm_25\stm32f1xx_hal_exti.o"
+"pwm_25\system_stm32f1xx.o"
+--strict --scatter "PWM_25\PWM_25.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "PWM_25.map" -o PWM_25\PWM_25.axf
